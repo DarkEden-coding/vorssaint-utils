@@ -166,18 +166,8 @@ struct CommandBarView: View {
 
     // MARK: - Field
 
-    /// Only calculator answers get inferred brackets; searches and argument fields stay untouched.
-    private var calculatorClosingBrackets: String {
-        guard case .search = service.mode,
-              service.rows.contains(where: { $0.id == "math.result" }) else { return "" }
-        return CommandBarMath.closingBrackets(for: service.query) ?? ""
-    }
-
     private var searchBar: some View {
-        let closingBrackets = calculatorClosingBrackets
-        let ghostWidth = closingBrackets.isEmpty ? 0
-            : (closingBrackets as NSString).size(withAttributes: [.font: NSFont.systemFont(ofSize: 16)]).width + 3
-        return HStack(spacing: 10) {
+        HStack(spacing: 10) {
             // The mark leads the field, the same face the quick panel and the
             // radial menu wear; modes speak through the chip and the cards.
             // Both axes are pinned: the panel re-fits on every keystroke and
@@ -217,13 +207,6 @@ struct CommandBarView: View {
                 .focused($searchFocused)
                 .disableAutocorrection(true)
                 .accessibilityLabel(text.pageTitle)
-                // Reserve room beyond the editor's scrolling edge for inferred closers.
-                .padding(.trailing, ghostWidth)
-                .overlay {
-                    CommandBarGhostBrackets(query: service.query, suffix: closingBrackets)
-                        .allowsHitTesting(false)
-                        .accessibilityHidden(true)
-                }
             if service.isCompactHome { compactHints }
             if !service.query.isEmpty {
                 Button {
@@ -833,6 +816,9 @@ struct CommandBarView: View {
             if service.selectedEntry?.id == "math.result" {
                 Text("⇥")
                     .font(.system(size: 9, weight: .semibold, design: .rounded))
+                    .foregroundStyle(.tertiary)
+                Text(text.reuseHint)
+                    .font(.system(size: 9))
                     .foregroundStyle(.tertiary)
             }
             Image(systemName: "return")

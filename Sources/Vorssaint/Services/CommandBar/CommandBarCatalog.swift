@@ -1484,7 +1484,7 @@ enum CommandBarCatalog {
             return CommandBarEntry(
                 id: "math.result",
                 title: result.formatted,
-                subtitle: completed + bar.copyHint + " · ⇥ → " + CommandBarMath.reusableExpression(for: result),
+                subtitle: completed + bar.copyHint,
                 icon: .symbol("equal.square"),
                 isAnswer: true,
                 countsUsage: false,
