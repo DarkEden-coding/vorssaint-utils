@@ -33,15 +33,6 @@ enum CommandBarMath {
         return Result(formatted: formatted, value: value, closingBrackets: parsed.closingBrackets)
     }
 
-    /// Returns the closing brackets that can be supplied to make `input`
-    /// complete. It returns nil for searches, malformed expressions, mismatched
-    /// brackets, and extra closers; an already balanced expression returns "".
-    static func closingBrackets(for input: String) -> String? {
-        parse(input,
-              decimalSeparator: Locale.current.decimalSeparator ?? ".",
-              groupingSeparator: Locale.current.groupingSeparator ?? ",")?.closingBrackets
-    }
-
     /// Produces an ungrouped, locale-aware number suitable for putting an
     /// answer back into the calculator. Swift's shortest round-trip spelling
     /// avoids exposing binary noise; brackets preserve negative values under powers.

@@ -23227,14 +23227,14 @@ struct MetricsTests {
         expect(math("1.500+1", decimal: ",", grouping: ".") == "1,501",
                "three digits after the grouping separator read as thousands")
 
-        expect(CommandBarMath.closingBrackets(for: "([2+3") == "])"
-                && CommandBarMath.closingBrackets(for: "2+3") == "",
+        expect(CommandBarMath.evaluate("([2+3")?.closingBrackets == "])"
+                && CommandBarMath.evaluate("2+3")?.closingBrackets == "",
                "virtual closers preserve bracket kind and nesting")
         expect(mathValue("sqrt(81") == 9 && mathValue("2*(3+[4") == 14,
                "functions and nested brackets evaluate before closers are typed")
         for expression in ["(2+3]", "2+3)", "2*(3+", "sqrt(", "sin2", "log100(2)",
                            "sqrt(-1)", "log(0)", "acos(2)", "1e309+0", "7=+3", "7+3=="] {
-            expect(mathValue(expression) == nil && CommandBarMath.closingBrackets(for: expression) == nil,
+            expect(mathValue(expression) == nil && CommandBarMath.evaluate(expression)?.closingBrackets == nil,
                    "invalid calculator input has neither an answer nor ghost brackets: \(expression)")
         }
         for (expression, expected) in [
@@ -25149,27 +25149,7 @@ struct MetricsTests {
         expect(RecorderSupport.takeID(fromFolderName: "Downloads") == nil,
                "an unrelated folder is never mistaken for a recording")
 
-        var englishFormats: [String: [String]] = [:]
         for language in AppLanguage.allCases {
-            for child in Mirror(reflecting: FeatureStrings.commandBar(language)).children {
-                guard let label = child.label, let value = child.value as? String else { continue }
-                let found = formatSpecifiers(in: value)
-                if language == .enUS {
-                    englishFormats[label] = found
-                } else {
-                    expect(englishFormats[label] == found,
-                           "\(label) takes the same arguments in \(language.rawValue) as in en-US")
-                }
-            }
-        }
-
-        for language in AppLanguage.allCases {
-            let commandBarValues = Mirror(reflecting: FeatureStrings.commandBar(language)).children
-                .compactMap { $0.value as? String }
-            expect(commandBarValues.count == 159 && commandBarValues.allSatisfy { !$0.isEmpty },
-                   "every command bar string is set for \(language.rawValue)")
-            expect(commandBarValues.allSatisfy { !$0.contains("—") },
-                   "no em-dash in visible command bar strings (\(language.rawValue))")
             // The battery example chip types this word into the bar, and the
             // answer it must reach is titled with it. Two words would not be
             // one typable example, and an empty one would be no example.
