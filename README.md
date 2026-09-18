@@ -100,7 +100,7 @@ The rest bends the same way: panel sections reorder and hide, the compact layout
 
 ### Keyboard and mouse
 
-- **Text snippets.** Type a short trigger anywhere and it becomes your text, expanded instantly or after a space, with clipboard variables plus date and time in any format you like. A searchable quick menu, organized into folders, types any snippet right at your cursor.
+- **Text snippets.** Type a short trigger anywhere and it becomes your text, expanded instantly or after a space, with clipboard variables plus date and time in any format you like, and an optional sound when a typed trigger expands. A searchable quick menu, organized into folders, types any snippet right at your cursor. When another app's secure input blocks typing, Settings names that app.
 - **Smooth scrolling.** Gives a mouse wheel a fluid glide with adjustable speed and response.
 - **Pointer acceleration.** Optionally disable acceleration for connected mice while preserving the previous system setting for restoration.
 - **Focus follows mouse.** Install it from Features to bring the window under the
@@ -151,7 +151,7 @@ The rest bends the same way: panel sections reorder and hide, the compact layout
 
 ### Energy and display
 
-- **Keep awake.** Keep the Mac up for a timer, until you say stop or automatically with an external display, a power connection or selected apps running in the background, pause the session while the Mac is locked, keep going with the lid closed, let displays sleep without stopping local work, choose the active menu bar icon and color, see the remaining time beside it, and optionally toggle it with a right click.
+- **Keep awake.** Keep the Mac up for a timer, until you say stop or automatically with an external display, a power connection or selected apps running in the background, matched one at a time or all together, pause the session while the Mac is locked, keep going with the lid closed, let displays sleep without stopping local work, choose the active menu bar icon and color, see the remaining time beside it, and optionally toggle it with a right click.
 - **Displays.** Adjust brightness or turn individual displays on and off. External screens use their own control channel when available and fall back to dimming the picture, while the keyboard brightness keys can follow the pointer and show the brightness percentage. Optional custom brightness shortcuts adjust the primary display or the display under the pointer. Enable and edit them under More options, on the Keyboard shortcuts page or in the panel's Options.
 - **Extra brightness.** Pushes the XDR panel of a MacBook Pro past its regular maximum using the display's HDR headroom. Toggle it from the Displays panel or Settings.
 - **Bluetooth on sleep.** Switches Bluetooth off while the Mac sleeps, so a laptop in a bag stops stealing the headphones you are listening to elsewhere. Bluetooth you had already turned off stays off, and only what Vorssaint switched off comes back on wake.
